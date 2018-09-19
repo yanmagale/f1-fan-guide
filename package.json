@@ -1,0 +1,21 @@
+{
+  "name": "f1-fan-guide",
+  "version": "0.1.0",
+  "private": false,
+  "dependencies": {
+    "f1-stats": "^0.0.12",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-scripts": "1.1.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "description": "A react app that show F1 2018 results",
+  "main": "index.js",
+  "author": "Yan Magalhaes",
+  "license": "MIT"
+}
