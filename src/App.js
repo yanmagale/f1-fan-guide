@@ -24,6 +24,20 @@ class App extends Component {
       console.log(Drivers);
     });
   }
+
+  getConstructors() {
+    f1("2018 constructors", (res) => {
+      const {Constructors} = res.MRData.ConstructorTable;
+      console.log(Constructors);
+    });
+  }
+
+  getNextRaceInformation() {
+    f1("current next", (res) => {
+      const {Races} = res.MRData.RaceTable;
+      console.log(Races);
+    });
+  }
 }
 
 export default App;
