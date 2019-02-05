@@ -6,12 +6,14 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      drivers: []
+      drivers: [],
+      constructors:[]
     }
   }
 
   componentDidMount() {
     this.getDrivers();
+    this.getConstructors();
   }
 
   render() {
@@ -20,9 +22,19 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">F1 Fan Guide</h1>
           <div>
-            {this.state.drivers.map(driver => (
+            <h2>Drivers</h2> 
+            {this.state.drivers.map(driver => ( 
               <div>
-                {driver.code} - {driver.familyName}
+              ({driver.code}) - {driver.givenName} {driver.familyName} {driver.permanentNumber}
+              </div>  
+            ))}
+          </div>
+
+          <div>
+            <h2>Constructors</h2> 
+            {this.state.constructors.map(constructor => ( 
+              <div>
+                {constructor.name}
               </div>  
             ))}
           </div>
@@ -36,14 +48,13 @@ class App extends Component {
     f1("2018 drivers", (res) => {
       const {Drivers} = res.MRData.DriverTable;
       this.setState({ drivers: Drivers });
-      console.log(this.state.drivers);
     });
   }
 
   getConstructors() {
     f1("2018 constructors", (res) => {
       const {Constructors} = res.MRData.ConstructorTable;
-      console.log(Constructors);
+      this.setState({ constructors: Constructors });
     });
   }
 
