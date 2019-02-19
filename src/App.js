@@ -21,24 +21,19 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">F1 Fan Guide</h1>
-          <div>
-            <h2>Drivers</h2> 
-            {this.state.drivers.map(driver => ( 
-              <div>
-              ({driver.code}) - {driver.givenName} {driver.familyName} {driver.permanentNumber}
-              </div>  
+          <h2>Drivers</h2>
+          <div style={style.container}>
+            {this.state.drivers.map((driver, key) => ( 
+              <Driver
+                key={key} 
+                code={driver.code} 
+                givenName={driver.givenName}
+                familyName={driver.familyName}
+                number={driver.permanentNumber}
+                url={driver.url}>
+              </Driver>
             ))}
           </div>
-
-          <div>
-            <h2>Constructors</h2> 
-            {this.state.constructors.map(constructor => ( 
-              <div>
-                {constructor.name}
-              </div>  
-            ))}
-          </div>
-
         </header>
       </div>
     );
@@ -57,13 +52,52 @@ class App extends Component {
       this.setState({ constructors: Constructors });
     });
   }
+}
 
-  getNextRaceInformation() {
-    f1("current next", (res) => {
-      const {Races} = res.MRData.RaceTable;
-      console.log(Races);
-    });
+function Driver(props) {
+  return (
+    <div 
+      style={style.driver}>
+      <div style={style.informationNumber}>{props.number}</div>
+      <div style={style.information}>{props.givenName} {props.familyName} </div>
+      <div 
+        style={style.informationUniversalCode}
+        onClick={() => window.open(props.url, 'blank')}>
+          {props.code}
+      </div>
+    </div>
+  );
+}
+
+const style = {
+  container: {
+    display: 'grid',
+    gridTemplateColumns: '150px 150px 150px 150px',
+    gridGap: '20px'
+  },
+  driver: {
+    padding: `10px`,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'spaceBetween',
+    flexDirection: 'column',
+    width: '150px',
+    lineHeight: '1.8'
+  },
+  information: {
+    width: '100%',
+    textAlign: 'center'
+  },
+  informationUniversalCode: {
+    width: '100%',
+    cursor: 'pointer',
+    textAlign: 'center' 
+  },
+  informationNumber: {
+    width: '100%',
+    textAlign: 'right'
   }
 }
+
 
 export default App;
